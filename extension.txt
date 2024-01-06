@@ -1,0 +1,55 @@
+
+There are two parts to this extension.
+
+First, the grammar has been extended to include a function called <SHOW>.
+
+<IOFUNC> is updated as follows:
+<IOFUNC>   ::= <SET> | <PRINT> | <SHOW>
+
+<SHOW> is as follows:
+<SHOW> ::= "SHOW" <LIST>
+
+The rest of the grammar is unchanged.
+
+<SHOW> "draws" a lisp structure to the screen.
+For example, the instruction (SHOW (CONS '5' NIL)) outputs the string:
+
+   X
+   |
+   V
+   5
+
+and the instruction (SHOW '(1 2(3 4(5 6) 7) 8 (9 0 (1 2)))') outputs the string:
+
+   X -> X -> X ---- ---- ---- ---- -> X -> X
+   |    |    |                        |    |
+   V    V    V                        V    V
+   1    2    X -> X -> X ---- -> X    8    X -> X -> X
+             |    |    |         |         |    |    |
+             V    V    V         V         V    V    V
+             3    4    X -> X    7         9    0    X -> X
+                       |    |                        |    |
+                       V    V                        V    V
+                       5    6                        1    2
+
+I decided to include this because it makes it easier to visualise the structure of a lisp.
+
+
+
+Second, there is an OPTIONAL interactive shell mode by using "-shell" as argv[1] instead of a file.
+This allows the user to type an <INSTRCT> (not a <PROG>) directly to the terminal, and see the interpreted output.
+If the input leads to a parsing error, the error message will be printed.
+
+For example, the following inputs (the lines preceded by >>>) give the interpreted outputs and error message:
+
+>>> (PRINT '5')
+5
+>>> (SET A '(1 2 3)')
+>>> (PRINT A)
+(1 2 3)
+>>> GARBAGE
+[ERROR] Expected '(' to contain a <FUNC>
+>>> q
+
+
+In order to quit the interactive shell, type q then hit enter.
