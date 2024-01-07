@@ -1,6 +1,15 @@
 ### C Coursework (Nuclei)
 
-Create a parser and interpreter in C for a made up language (Nuclei), which is similar to LISP.
+Create a parser and interpreter in C for a made up language (Nuclei), which is similar to LISP, for my CS coursework at Bristol.
+
+## Usage:
+Take a look at the Makefile.
+```make parser``` builds the parser only.
+```make interp``` builds the interpreter.
+```make extension``` builds the extention - take a look at extension.txt to see what it does.
+
+Use .ncl files for the parser and interpreter.
+Use .ecl files for the extension
 
 ## Nuclei Grammar:
 
